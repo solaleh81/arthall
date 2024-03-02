@@ -1,0 +1,49 @@
+# This version of the docker-compose file sets up two services: 'web' and 'db'.
+# 'web' service:
+#   - Builds the Docker image using the Dockerfile in the current directory.
+#   - Runs the Django server with the command 'python manage.py runserver 0.0.0.0:8000'.
+#   - Mounts the current directory as a volume inside the container.
+#   - Exposes port 8001 on the host to port 8000 on the container.
+#   - Depends on the 'db' service.
+#   - Sets environment variables to ensure Python doesn't write bytecode and output is unbuffered.
+
+# 'db' service:
+#   - Uses the latest Postgres image available on Docker Hub.
+#   - Exposes port 5432 on the host to port 5432 on the container.
+#   - Sets environment variables for the Postgres database: database name, username, and password.
+
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+
+  db:
+    image: postgres:latest
+    restart: always
+
+#    volumes:
+#      - database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=art_hall_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+#volumes: # create volume dbData
+#   database:
+
+
+
+

@@ -32,7 +32,8 @@ services:
     image: postgres:latest
     restart: always
 
-
+    volumes:
+      - database:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
@@ -40,7 +41,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
-
+volumes: # create volume dbData
+   database:
 
 
 

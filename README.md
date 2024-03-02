@@ -17,6 +17,7 @@ User Roles: Users have different roles such as normal user, admin, and superuser
 
 Installation:
 
+git clone git@github.com:solaleh81/arthall.git
 
 docker exec -it arthall-web-1 /bin/bash
 

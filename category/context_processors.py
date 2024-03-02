@@ -15,16 +15,16 @@ def menu_links(request):
     links = Category.objects.all()
     return dict(links=links)
 
-def gifts(request):
-    """
-    Function to retrieve gift category links.
-
-    Args:
-        request: HttpRequest object representing the HTTP request.
-
-    Returns:
-        dict: A dictionary containing gift category links.
-    """
-    # Retrieve all gift category objects
-    gifts = GiftCategory.objects.all()
-    return dict(links=gifts)
+# def gifts(request):
+#     """
+#     Function to retrieve gift category links.
+#
+#     Args:
+#         request: HttpRequest object representing the HTTP request.
+#
+#     Returns:
+#         dict: A dictionary containing gift category links.
+#     """
+#     # Retrieve all gift category objects
+#     gifts = GiftCategory.objects.all()
+#     return dict(links=gifts)

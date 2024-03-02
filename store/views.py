@@ -32,7 +32,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 
 from cart.views import _cart_id
-from category.models import Category
+from category.models import Category, GiftCategory
 from store.models import Product, Price
 from cart.models import Cart, CartItem
 
@@ -42,7 +42,7 @@ class Store(APIView):
     APIView for browsing products in the store, optionally filtered by category and price range.
     """
 
-    def get(self, request, category_slug=None):
+    def get(self, request, category_slug=None, gift_slug=None):
         """
         Handles GET requests for browsing products.
 
@@ -62,6 +62,10 @@ class Store(APIView):
         if category_slug:
             category = get_object_or_404(Category, slug=category_slug)
             products = products.filter(category=category)
+
+        if gift_slug:
+            gift = get_object_or_404(GiftCategory, slug=gift_slug)
+            products = products.filter(gift=gift)
 
         if min_price is not None and max_price is not None:
             products = products.filter(price__price__range=(min_price, max_price))
